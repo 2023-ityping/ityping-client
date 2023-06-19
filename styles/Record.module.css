@@ -43,3 +43,10 @@
     text-align: start;
 }
 
+.card_container {
+    width: 1105px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 59px;
+}

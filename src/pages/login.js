@@ -72,7 +72,7 @@ const Login = () => {
             type="submit"
           >
             로그인
-          </button>m,
+          </button>
         </form>
         <div className={styles.or}>OR</div>
         <button className={styles.google_btn} onClick={(e)=> signIn('google')}>
