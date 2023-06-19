@@ -9,7 +9,7 @@ const Modal = (props) => {
     const GameScore = async () => {
         console.log(nickname, props.score)
         try {
-          const response = await axios.post("/api/game", {
+          const response = await axios.post("http://localhost:5000/api/game", {
             email : localStorage.getItem('email'), 
             name: localStorage.getItem('nickname'), 
             score: props.score,
@@ -29,7 +29,7 @@ const Modal = (props) => {
             <div className={styles.text}>{name} 님</div>
             <div className={styles.text}>점수 : {props.score}</div>
             <div className={styles.btn_container}>
-                <button className={styles.btn}><a href='gamestart'>다시하기</a></button>
+                <button className={styles.btn}><a href={props.gametype}>다시하기</a></button>
                 <button className={styles.btn} onClick={GameScore}>랭킹 보러가기</button>
             </div>
         </div>

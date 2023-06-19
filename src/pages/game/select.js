@@ -13,8 +13,11 @@ const SelectGame = (props) => {
 	const [min, setMin] = useState()
 	const [myrank, setMyrank] = useState()
 	const handleButtonClick = () => {
-		router.push('/game/gamestart');
+		router.push('/game/shortcutsgames');
 	};
+	const emmatsgames = () => {
+		router.push('/game/emmatsgames')
+	}
 
     useEffect(() => {
         const fetchGameRank = async () => {
@@ -90,7 +93,7 @@ const SelectGame = (props) => {
 							</div>
 							<div style={{color: '#FDFDFD', fontWeight: 500, position:'absolute', top: '836px', left:'860px'}}>랭킹 : {myrank} 등</div>
 						</div>
-						<div><img src='/images/game_back.png'/></div>
+						<div onClick={emmatsgames}><img src='/images/game_back.png'/></div>
 					</div>
 				</div>
 			</div>

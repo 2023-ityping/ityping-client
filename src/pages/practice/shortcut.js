@@ -5,6 +5,8 @@ import { shortcuts } from '@/public/shortcuts';
 import { useEffect, useState } from 'react';
 import Modal from '@/src/component/Modal';
 import JSConfetti from 'js-confetti';
+import { useRouter } from "next/router";
+import axios from 'axios';
 
 const PracticeShortcut = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,7 +14,7 @@ const PracticeShortcut = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
+  const router = useRouter();
   const [currentIdx, setCurrentIdx] = useState(0); //데이터베이스에 보낼 %값    n/19
   const [currentKeyIdx, setCurrentKeyIdx] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -32,6 +34,28 @@ const PracticeShortcut = () => {
       confettiNumber: 500,
       });
   }
+
+  const praShortcut = async () => {
+    try {
+      const email = localStorage.getItem('email');
+      const count = currentIdx;
+  
+      const response = await axios.get("http://localhost:5000/api/update", {
+        params: {
+          data: "pra_shortcut", // 여기에 쿼리 매개변수 설정
+          email: email,
+          count: count
+        }
+      });
+  
+      if (response) {
+        alert("성공");
+        router.replace('/study/shortcut');
+      }
+    } catch (error) {
+      console.error("요청 중 오류 발생:", error);
+    }
+  }  
 
 
   useEffect(() => {
@@ -70,15 +94,15 @@ const PracticeShortcut = () => {
 
   return (
     <>
-      {showModal && (
+      {!showModal && ( //!테스트용 -> ! 지워야 함
         <div className={styles.modal}>
             <p className={styles.title2}>Visual Studio Code 단축어 연습</p>
           <div className={styles.modalContent}>
-            <p className={styles.text}>22/28개 진행중입니다.
+            <p className={styles.text}>{currentIdx}/19개 진행중입니다.
             <br/>저장하시겠습니까?</p>
           </div>
           <div className={styles.btn_container}>
-            <button className={styles.btn}>저장하기</button>
+            <button className={styles.btn} onClick={praShortcut}>저장하기</button>
             <button className={styles.btn} onClick={handleCloseModal}>종료하기</button>
           </div>
         </div>

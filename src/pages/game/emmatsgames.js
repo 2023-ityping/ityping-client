@@ -1,7 +1,7 @@
 import Navbar from '@/src/component/Navbar';
 import Sidebar from '@/src/component/Sidebar';
 import styles from '@/styles/GameStart.module.css'
-import { shortcuts } from '@/public/shortcuts';
+import { emmatsgames } from '@/public/emmats';
 import { useState,useEffect } from 'react';
 import ModalResult from '@/src/component/GameResultModal';
 import Modal from '@/src/component/GameModal';
@@ -20,14 +20,14 @@ const SelectGame = (props) => {
   const [description, setDescription] = useState("")
   const [idx1, setInx1] = useState([])
   const [idx2, setInx2] = useState([])
-  const gametype = "shortcuts"
+  const gametype = "emmatsgames"
 
   //랜덤으로 단축키 4개 선택 
   useEffect(() => {
-    const selectedShortcuts = getRandomShortcuts(shortcuts, 4); // Select 4 random shortcuts
-    console.log(selectedShortcuts)
-    const shuffledTexts = shuffle(selectedShortcuts)
-    const shuffledDescriptions = shuffle(selectedShortcuts.map((shortcuts) => shortcuts.description))
+    const selectedemmatsgames = getRandomemmatsgames(emmatsgames, 4); // Select 4 random emmatsgames
+    console.log(selectedemmatsgames)
+    const shuffledTexts = shuffle(selectedemmatsgames)
+    const shuffledDescriptions = shuffle(selectedemmatsgames.map((emmatsgames) => emmatsgames.description))
     setCards(shuffledTexts);
     setCards2(shuffledDescriptions);
   }, []);
@@ -83,10 +83,10 @@ const SelectGame = (props) => {
             setInx2([])
             setTimeout(() => {
               //새로운 카드 생성
-              const selectedShortcuts = getRandomShortcuts(shortcuts, 4); // Select 4 random shortcuts
-              console.log(selectedShortcuts)
-              const shuffledTexts = shuffle(selectedShortcuts)
-              const shuffledDescriptions = shuffle(selectedShortcuts.map((shortcuts) => shortcuts.description))
+              const selectedemmatsgames = getRandomemmatsgames(emmatsgames, 4); // Select 4 random emmatsgames
+              console.log(selectedemmatsgames)
+              const shuffledTexts = shuffle(selectedemmatsgames)
+              const shuffledDescriptions = shuffle(selectedemmatsgames.map((emmatsgames) => emmatsgames.description))
               setCards(shuffledTexts);
               setCards2(shuffledDescriptions);
               setFlippedCards([])
@@ -96,7 +96,7 @@ const SelectGame = (props) => {
           setScore((score) => score - 50);
           // 단어에 대한 설명
           setDescription(card1.description)
-          setTitle(card1.text)
+          setTitle(card1.emmat)
           setModalStyle(false)
         }
         openModal()
@@ -107,10 +107,10 @@ const SelectGame = (props) => {
     }
   };
 
-  const getRandomShortcuts = (shortcuts, count) => {
-    const uniqueShortcuts = Array.from(new Set(shortcuts)); // 중복 제거
-    const shuffledShortcuts = shuffle(uniqueShortcuts);
-    return shuffledShortcuts.slice(0, count);
+  const getRandomemmatsgames = (emmatsgames, count) => {
+    const uniqueemmatsgames = Array.from(new Set(emmatsgames)); // 중복 제거
+    const shuffledemmatsgames = shuffle(uniqueemmatsgames);
+    return shuffledemmatsgames.slice(0, count);
   };
 
   const shuffle = (array) => {
@@ -160,10 +160,10 @@ const SelectGame = (props) => {
                       key={index}
                       onClick={() => {
                         handleCardClick(index, 1)
-                        setTitle(card.text)
+                        setTitle(card.emmat)
                       }}
                     >
-                      <div>{card.text}</div>
+                      <div>{card.emmat}</div>
                     </div>
                   );
                 }

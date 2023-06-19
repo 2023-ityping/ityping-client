@@ -5,6 +5,8 @@ import { shortcuts } from '@/public/shortcuts';
 import { useEffect, useState } from 'react';
 import Modal from '@/src/component/Modal';
 import JSConfetti from 'js-confetti';
+import { useRouter } from "next/router";
+import axios from 'axios';
 
 const TrainingShortcut = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,7 +14,7 @@ const TrainingShortcut = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
+  const router = useRouter();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [currentKeyIdx, setCurrentKeyIdx] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -77,9 +79,31 @@ const TrainingShortcut = () => {
     isAllCorrect ? setBackgroundColor("#C9EEDC") : setBackgroundColor("#FFDDDD");
   }
 
+  const stuShortcut = async () => {
+    try {
+      const email = localStorage.getItem('email');
+      const count = currentIdx;
+  
+      const response = await axios.get("http://localhost:5000/api/update", {
+        params: {
+          data: "stu_shortcut", // 여기에 쿼리 매개변수 설정
+          email: email,
+          count: count
+        }
+      });
+  
+      if (response) {
+        alert("성공");
+        router.replace('/study/shortcut');
+      }
+    } catch (error) {
+      console.error("요청 중 오류 발생:", error);
+    }
+  }  
+
   return (
     <>
-      {showModal && (
+      {!showModal && (
         <div className={styles.modal}>
             <p className={styles.title2}>Visual Studio Code 단축어 연습</p>
           <div className={styles.modalContent}>
@@ -87,7 +111,7 @@ const TrainingShortcut = () => {
             <br/>저장하시겠습니까?</p>
           </div>
           <div className={styles.btn_container}>
-            <button className={styles.btn}>저장하기</button>
+            <button className={styles.btn} onClick={stuShortcut}>저장하기</button>
             <button className={styles.btn} onClick={handleCloseModal}>종료하기</button>
           </div>
         </div>
