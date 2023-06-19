@@ -50,6 +50,7 @@
 }
 
 .rank_text {
+    float: right;
     margin-top: 15px;
     font-size: 20px;
 }
@@ -62,23 +63,49 @@
 }
 
 .rank {
-    width: 211px;
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2vw 5vw 3.5vw;
+    grid-row-gap: 26px;
+    grid-template-rows: 36px;
+    grid-column-gap: 10px;
 }
 
 .left_box .text {
-    margin-right: 85px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
     color: #534E4E;
 }
 
 .right_box .text {
-    margin-right: 70px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
     color: #534E4E;
+}
+
+.left_box .numr {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #534E4E;
+    text-align: right;
+}
+
+.right_box .numr {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #534E4E;
+    text-align: right;
 }
 
 .score {
     color: #FDFDFD;
     font-size: 13px;
+    font-weight: 400;
+    text-align: right;
 }
 
 .line {

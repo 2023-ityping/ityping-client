@@ -1,5 +1,4 @@
 import styles from '@/styles/Navbar.module.css';
-import Cookies from 'js-cookie';
 import React from "react";
 import { useState, useEffect } from 'react';
 
@@ -8,7 +7,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('/api/user', {
+        const response = await fetch('http://localhost:5000/api/user', {
           credentials: 'include', // 'connect.sid' 쿠키를 포함하도록 설정
         });
         if (response.ok) {

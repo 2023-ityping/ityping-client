@@ -4,10 +4,8 @@ import React, { useState, useSyncExternalStore } from "react";
 import axios from 'axios';
 import Navbar from "../component/Navbar";
 import { useRouter } from "next/router";
-import { useSession, signIn, signOut } from 'next-auth/react';
 
 const Login = () => {
-  const {data: session} = useSession()
   const router = useRouter();
   const [id, setId] = useState("");
   const [pw, setPw] = useState(""); 
@@ -75,7 +73,7 @@ const Login = () => {
           </button>
         </form>
         <div className={styles.or}>OR</div>
-        <button className={styles.google_btn} onClick={(e)=> signIn('google')}>
+        <button className={styles.google_btn}>
           <img className={styles.google_img} src="/images/google.png" />
           Sign in with Google
         </button>

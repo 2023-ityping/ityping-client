@@ -8,7 +8,7 @@ import Modal from '@/src/component/GameModal';
 
 const SelectGame = (props) => {
   const [score, setScore] = useState(0);
-  const [timer, setTime] = useState();
+  const [timer, setTime] = useState(5);
   const [cards, setCards] = useState([]);
   const [cards2, setCards2] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -20,6 +20,7 @@ const SelectGame = (props) => {
   const [description, setDescription] = useState("")
   const [idx1, setInx1] = useState([])
   const [idx2, setInx2] = useState([])
+  const gametype = "shortcuts"
 
   //랜덤으로 단축키 4개 선택 
   useEffect(() => {
@@ -137,7 +138,7 @@ const SelectGame = (props) => {
               <Modal style={modalStyle} text={title} description={description}/>
             )}
             {isModalOpenResult && (
-              <ModalResult score = {score} />
+              <ModalResult score = {score} gametype={gametype}/>
             )}
             <div className={styles.card_container}>
               {cards.map((card, index) => {

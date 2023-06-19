@@ -1,20 +1,23 @@
 import styles from '@/styles/ResultModal.module.css';
-import { useState } from 'react';
+import { useRouter } from "next/router";
 import axios from 'axios';
 
 const Modal = (props) => {
+    const router = useRouter();
     const nickname = localStorage.getItem('nickname');
     const name = nickname ? nickname : '비회원'
     const GameScore = async () => {
         console.log(nickname, props.score)
         try {
-          const response = await axios.post("localhost:5000/api/game", {
-            nickname: name,
-            score: props.score
+          const response = await axios.post("/api/game", {
+            email : localStorage.getItem('email'), 
+            name: localStorage.getItem('nickname'), 
+            score: props.score,
+            gametype: props.gametype
           });
           if(response) {
             alert("성공")
-            // router.push('/select')
+            router.replace('/game/select');
           }
         } catch (error) {
           console.error("게임 점수 입력 중 오류 발생:", error);
