@@ -8,7 +8,7 @@ import Modal from '@/src/component/GameModal';
 
 const SelectGame = (props) => {
   const [score, setScore] = useState(0);
-  const [timer, setTime] = useState(30);
+  const [timer, setTime] = useState();
   const [cards, setCards] = useState([]);
   const [cards2, setCards2] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -18,6 +18,8 @@ const SelectGame = (props) => {
   const [modalStyle, setModalStyle] = useState(true);
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
+  const [idx1, setInx1] = useState([])
+  const [idx2, setInx2] = useState([])
 
   //랜덤으로 단축키 4개 선택 
   useEffect(() => {
@@ -37,7 +39,7 @@ const SelectGame = (props) => {
       ResultopenModal()
       clearInterval(timerInterval)
     }
-    //컴포넌트가 
+    
     return () => clearInterval(timerInterval)
   })
 
@@ -55,28 +57,29 @@ const SelectGame = (props) => {
   }
 
   // 클릭했을 때 정답인지 아닌지 확인하기 
-  const handleCardClick = (index) => {
+  const handleCardClick = (index, num) => {
     if (flippedCards.length < 2) {
       const newFlippedCards = [...flippedCards, index];
       setFlippedCards(newFlippedCards);
-
       if (newFlippedCards.length === 2) {
         const [cardIndex1, cardIndex2] = newFlippedCards;
-        const card1 = cards[cardIndex1];
-        const card2 = cards2[cardIndex2];
-
+        const card1 = num === 2 ? cards[cardIndex1] : cards[cardIndex2];
+        const card2 = num === 2 ? cards2[cardIndex2] : cards2[cardIndex1];
         if (card1.description === card2) {
-          setMatchedCards([...matchedCards, cardIndex1, cardIndex2]);
-
-          //일치하는 카드 숨기기
-          const updatedCade = cards.filter((_, i) => i !== cardIndex1)
-          setCards(updatedCade)
-          const updatedCade2 = cards2.filter((_, i) => i != cardIndex2)
-          setCards2(updatedCade2)
           setScore((score) => score + 100);
           setModalStyle(true)
-          openModal()
-          if(cards.length == 1 || card2.length == 2){
+          setMatchedCards([...matchedCards, cardIndex1, cardIndex2]);
+          if(num == 2){
+            setInx1([...idx1, cardIndex1])
+            setInx2([...idx2, cardIndex2])
+          }else{
+            setInx1([...idx2, cardIndex2])
+            setInx2([...idx1, cardIndex1])
+          }
+          
+          if(idx1.length == 4 || idx2.length == 4){
+            setInx1([])
+            setInx2([])
             setTimeout(() => {
               //새로운 카드 생성
               const selectedShortcuts = getRandomShortcuts(shortcuts, 4); // Select 4 random shortcuts
@@ -90,11 +93,12 @@ const SelectGame = (props) => {
           }
         } else {
           setScore((score) => score - 50);
-          setModalStyle(false)
+          // 단어에 대한 설명
           setDescription(card1.description)
-          openModal()
+          setTitle(card1.text)
+          setModalStyle(false)
         }
-
+        openModal()
         setTimeout(() => {
           setFlippedCards([]);
         }, 1000);
@@ -103,7 +107,8 @@ const SelectGame = (props) => {
   };
 
   const getRandomShortcuts = (shortcuts, count) => {
-    const shuffledShortcuts = shuffle(shortcuts);
+    const uniqueShortcuts = Array.from(new Set(shortcuts)); // 중복 제거
+    const shuffledShortcuts = shuffle(uniqueShortcuts);
     return shuffledShortcuts.slice(0, count);
   };
 
@@ -134,33 +139,60 @@ const SelectGame = (props) => {
             {isModalOpenResult && (
               <ModalResult score = {score} />
             )}
-						<div className={styles.card_container}>
-              {cards.map((card, index) => (
-                <div
-                  className={styles.card}
-                  isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
-                  key={index}
-                  onClick={() => {
-                    handleCardClick(index)
-                    setTitle(card.text)
-                  }}>
-                  <div>{card.text}</div>
-              </div>
-              ))}
+            <div className={styles.card_container}>
+              {cards.map((card, index) => {
+                if (idx1.includes(index)) {
+                  return (
+                    <div
+                      style={{visibility: 'hidden'}}
+                      className={styles.card}
+                      isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
+                      key={index}
+                    >
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      className={styles.card}
+                      isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
+                      key={index}
+                      onClick={() => {
+                        handleCardClick(index, 1)
+                        setTitle(card.text)
+                      }}
+                    >
+                      <div>{card.text}</div>
+                    </div>
+                  );
+                }
+              })}
             </div>
             <div className={styles.card_container}>
-              {cards2.map((card, index) => (
+              {cards2.map((card, index) => {
+                if (idx2.includes(index)) {
+                  return(
+                    <div
+                      style={{visibility: 'hidden'}}
+                      className={styles.card2}
+                      key={index}
+                      isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}>
+                  </div>
+                  );
+                }else{
+                  return (
                   <div
                     className={styles.card2}
                     key={index}
                     isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
                     onClick={() => {
-                      handleCardClick(index)
-                      setDescription(card)
+                      handleCardClick(index, 2)
                       }}>
                     <div>{card}</div>
                 </div>
-                ))}
+                  )
+                }
+              })}
             </div>
             {isModalOpenResult && (
               <div className={styles.modal_back}></div>
