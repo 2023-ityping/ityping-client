@@ -1,0 +1,41 @@
+.container {
+  width: 530px;
+  height: 158px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  background-color: #CAB0FF;
+  border-radius: 20px;
+}
+
+.info_container {
+  height: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+}
+
+.tool {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+  background-color: #E8DDFF;
+  border-radius: 10px;
+}
+
+.tool_img {
+  width: 49px;
+  height: 49px;
+}
+
+.progress_container {
+  width: 100px;
+  height: 100px;
+}
