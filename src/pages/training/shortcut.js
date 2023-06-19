@@ -103,7 +103,7 @@ const TrainingShortcut = () => {
 
   return (
     <>
-      {!showModal && (
+      {showModal && (
         <div className={styles.modal}>
             <p className={styles.title2}>Visual Studio Code 단축어 연습</p>
           <div className={styles.modalContent}>
@@ -116,7 +116,7 @@ const TrainingShortcut = () => {
           </div>
         </div>
       )}
-      {currentIdx === shortcuts.length-1 || showModal ? <Modal title="Visual Studio Code 단축키 실습"/> : ""}
+      {currentIdx === shortcuts.length-1 ? <Modal title="Visual Studio Code 단축키 실습"/> : ""}
       <div style={currentIdx === shortcuts.length-1 ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
         <Navbar/>
         <div className={styles.container}>

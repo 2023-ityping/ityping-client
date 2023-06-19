@@ -87,7 +87,7 @@ const TrainingEmmat = () => {
           </div>
         </div>
       )}
-			{currentIdx === emmats.length-1 || showModal ? <Modal title="Visual Studio Code 단축어 실습"/> : ""}
+			{currentIdx === emmats.length-1 ? <Modal title="Visual Studio Code 단축어 실습"/> : ""}
 			<div style={currentIdx === emmats.length-1 ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
 				<Navbar/>
 				<div className={styles.container}>

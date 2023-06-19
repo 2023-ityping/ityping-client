@@ -12,7 +12,7 @@ const Sidebar = (props) => {
         <div className={styles.menu}>
         {props.isStudy ? (
             <div className={styles.exit_box}>
-              <a className={styles.selected_text} onClick={props.handleEndStudy} href="/">
+              <a className={styles.selected_text} onClick={props.handleEndStudy}>
                 <img src="/images/leave.png" /> 학습종료
               </a>
             </div>
