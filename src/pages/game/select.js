@@ -8,7 +8,7 @@ const SelectGame = (props) => {
 	const router = useRouter();
 
 	const handleButtonClick = () => {
-		router.push('/game/shortcutsGame');
+		router.push('/game/gamestart');
 	};
 	return (
 		<>  

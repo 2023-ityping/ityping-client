@@ -1,0 +1,85 @@
+.container {
+    width: 1420px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.right_container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 200px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    margin-top: 6px;
+    margin-bottom: 24px;
+    margin-left: 12px;
+}
+
+.title_group{
+    display: grid;
+    grid-template-columns: 130px 110px;
+    column-gap: 455px;
+    margin-left: 12px;
+}
+
+.score {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    margin-top: 6px;
+    margin-bottom: 24px;
+}
+
+.game_container {
+    width: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card_container{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+}
+.card {
+    width: 305px;
+    border-radius: 10px;
+    height: 140px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 540;
+    background-color: #dde4ff;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card2 {
+    width: 305px;
+    border-radius: 10px;
+    height: 140px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: 540;
+    background-color: #CAB0ff;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_back{
+    position: absolute;
+    height: 100vw;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(217, 217, 217, 0.5);
+}

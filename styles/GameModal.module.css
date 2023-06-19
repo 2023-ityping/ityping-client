@@ -1,0 +1,45 @@
+.answer {
+    position: absolute;
+    width: 438px;
+    height: 258px;
+    position: absolute;
+    top: 412px;
+    left: 862px;
+    background-color: #c9eedc;
+    border-radius: 25px;
+    box-shadow: 10px 40px 20px 0px rgba(0, 0, 0, 0.01);
+    z-index: 100;
+}
+.wrong {
+    position: absolute;
+    width: 438px;
+    height: 258px;
+    position: absolute;
+    top: 412px;
+    left: 862px;
+    background-color: #ffdddd;
+    border-radius: 25px;
+    box-shadow: 10px 40px 20px 0px rgba(0, 0, 0, 0.01);
+    z-index: 100;
+}
+
+.text {
+    font-size: 25px;
+    margin-top: 45px;
+    margin-left: 184px;
+    font-weight: bold;
+}
+.title{
+    margin-top: 34px;
+    font-size: 20px;
+    font-weight: bold;
+    align-items: center;
+    text-align: center;
+}
+.desc{
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    align-items: center;
+    text-align: center;
+}
