@@ -1,5 +1,5 @@
 import styles from "@/styles/Sidebar.module.css";
-import React from "react";
+import React, { useState } from "react";
 
 const Sidebar = (props) => {
   let study = null;
@@ -21,6 +21,7 @@ const Sidebar = (props) => {
             <div className={props.isSelected ? styles.box : styles.selected_box}><a className={props.isSelected ? styles.text : styles.selected_text} href="/game/select"><img src={props.isSelected ? '/images/game.png' : '/images/selected-game.png'}/>단축키 게임</a></div>
           </div>
           }
+
         </div>
         <div className={styles.line}></div>
       </div>
