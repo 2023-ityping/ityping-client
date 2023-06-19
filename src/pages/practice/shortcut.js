@@ -7,6 +7,12 @@ import Modal from '@/src/component/Modal';
 import JSConfetti from 'js-confetti';
 
 const PracticeShortcut = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   const [currentIdx, setCurrentIdx] = useState(0); //데이터베이스에 보낼 %값    n/19
   const [currentKeyIdx, setCurrentKeyIdx] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -64,11 +70,24 @@ const PracticeShortcut = () => {
 
   return (
     <>
-      {currentIdx === shortcuts.length-1 ? <Modal title="Visual Studio Code 단축키 연습"/> : ""}
+      {showModal && (
+        <div className={styles.modal}>
+            <p className={styles.title2}>Visual Studio Code 단축어 연습</p>
+          <div className={styles.modalContent}>
+            <p className={styles.text}>22/28개 진행중입니다.
+            <br/>저장하시겠습니까?</p>
+          </div>
+          <div className={styles.btn_container}>
+            <button className={styles.btn}>저장하기</button>
+            <button className={styles.btn} onClick={handleCloseModal}>종료하기</button>
+          </div>
+        </div>
+      )}
+      {currentIdx === shortcuts.length-1 || showModal ? <Modal title="Visual Studio Code 단축키 연습"/> : ""}
       <div style={currentIdx === shortcuts.length-1 ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
         <Navbar/>
         <div className={styles.container}>
-        <Sidebar isStudy={true} isSelected={true}/>
+        <Sidebar isStudy={true} isSelected={true} handleEndStudy={() => setShowModal(true)}/>
           <div className={styles.right_container}>
             <div className={styles.title_container}>
               <p className={styles.title}>Visual Studio Code 단축어 연습</p>
