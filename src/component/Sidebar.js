@@ -7,24 +7,55 @@ const Sidebar = (props) => {
       study = 'space-between'
   }
   return (
+    <>
       <div className={styles.container} style={{justifyContent : study}}>
         <div className={styles.menu}>
-        {
-          props.isStudy ? 
-          <div className={styles.exit_box}><a className={styles.selected_text} href="/study/shortcut"><img src='/images/leave.png'/>학습종료</a></div>
-          :
-          props.isGame ? 
-            <div className={styles.exit_box}><a className={styles.selected_text} href="http://localhost:3000/game/select"><img src='/images/leave.png'/>게임취소</a></div>
-            :
-          <div>
-            <div className={props.isSelected ? styles.selected_box : styles.box}><a className={props.isSelected ? styles.selected_text : styles.text} href="/study/shortcut"><img src={props.isSelected ? '/images/selected-study.png' : '/images/study.png'}/>단축키 학습</a></div>
-            <div className={props.isSelected ? styles.box : styles.selected_box}><a className={props.isSelected ? styles.text : styles.selected_text} href="/game/select"><img src={props.isSelected ? '/images/game.png' : '/images/selected-game.png'}/>단축키 게임</a></div>
-          </div>
-          }
-
+        {props.isStudy ? (
+            <div className={styles.exit_box}>
+              <a className={styles.selected_text} onClick={props.handleEndStudy} href="/">
+                <img src="/images/leave.png" /> 학습종료
+              </a>
+            </div>
+          ) : props.isGame ? (
+            <div className={styles.exit_box}>
+              <a className={styles.selected_text} href="/game/select">
+                <img src="/images/leave.png" /> 게임취소
+              </a>
+            </div>
+          ) : (
+            <div>
+              <div
+                className={props.isSelected ? styles.selected_box : styles.box}
+              >
+                <a
+                  className={props.isSelected ? styles.selected_text : styles.text}
+                  href="/study/shortcut"
+                >
+                  <img
+                    src={props.isSelected ? "/images/selected-study.png" : "/images/study.png"}
+                  />
+                  단축키 학습
+                </a>
+              </div>
+              <div
+                className={props.isSelected ? styles.box : styles.selected_box}
+              >
+                <a
+                  className={props.isSelected ? styles.text : styles.selected_text}
+                  href="/game/select"
+                >
+                  <img
+                    src={props.isSelected ? "/images/game.png" : "/images/selected-game.png"}
+                  />
+                  단축키 게임
+                </a>
+              </div>
+            </div>
+          )}
         </div>
         <div className={styles.line}></div>
       </div>
+    </>
   );
 };
 
