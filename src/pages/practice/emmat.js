@@ -63,9 +63,20 @@ const PracticeEmmat = () => {
     }
   }  
 
+  const handleRetry = () => {
+    setCurrentIdx(0);
+    setCurrentKeyIdx(0);
+    setVisible(false);
+    setComplete(false);
+  }
+
+  const handleExit = () => {
+    redirect('/study/emmat');
+  }
+
   return (
     <>
-      {!showModal && (
+      {showModal && (
         <div className={styles.modal}>
             <p className={styles.title2}>Visual Studio Code 단축어 연습</p>
           <div className={styles.modalContent}>
@@ -74,14 +85,14 @@ const PracticeEmmat = () => {
           </div>
           <div className={styles.btn_container}>
             <button className={styles.btn} onClick={praEmmat}>저장하기</button>
-            <button className={styles.btn} onClick={handleCloseModal}>종료하기</button>
+            <button className={styles.btn} onClick={handleCloseModal}>계속하기</button>
           </div>
         </div>
       )}
-      {currentIdx === emmats.length - 1 ? <Modal title="Visual Studio Code 단축어 연습" /> : ""}
+      {currentIdx === emmats.length ? <Modal title="Visual Studio Code 단축어 연습" handleRetry={handleRetry} handleExit={handleExit}/> : ""}
       <div
         style={
-          currentIdx === emmats.length - 1 || showModal
+          currentIdx === emmats.length || showModal
             ? { width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%" }
             : null
         }
@@ -103,9 +114,10 @@ const PracticeEmmat = () => {
               className={styles.card}
               style={{ backgroundImage: "url('/images/practice_card.png')" }}
             >
-              <div className={styles.card_title}>{emmat.emmat}</div>
-              <div className={styles.card_content}>{emmat.description}</div>
+              {emmat && (<div className={styles.card_title}>{emmat.emmat}</div>)}
+              {emmat && (<div className={styles.card_content}>{emmat.description}</div>)}
             </div>
+            {emmat && (
             <div className={styles.input_container}>
               <label className={styles.text}>연습</label>
               <input
@@ -116,6 +128,7 @@ const PracticeEmmat = () => {
                 onChange={handlerEmmat}
               />
             </div>
+            )}
             {visible && (
               <div className={styles.btn_container}>
                 <button
@@ -136,7 +149,7 @@ const PracticeEmmat = () => {
                     setIsDisable(false);
                     setCurrentIdx(idx => idx + 1);
                     setVisible(false);
-                    currentIdx === emmats.length - 2 && handler();
+                    currentIdx === emmats.length - 1 && handler();
                   }}
                 >
                   넘어가기

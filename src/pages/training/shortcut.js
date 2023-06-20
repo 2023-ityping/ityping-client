@@ -124,12 +124,12 @@ const TrainingShortcut = () => {
           </div>
           <div className={styles.btn_container}>
             <button className={styles.btn} onClick={stuShortcut}>저장하기</button>
-            <button className={styles.btn} onClick={handleCloseModal}>종료하기</button>
+            <button className={styles.btn} onClick={handleCloseModal}>계속하기</button>
           </div>
         </div>
       )}
       {currentIdx === shortcuts.length ? <Modal title="Visual Studio Code 단축키 실습" handleRetry={handleRetry} handleExit={handleExit}/> : ""}
-      <div style={currentIdx === shortcuts.length ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
+      <div style={currentIdx === shortcuts.length || showModal ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
         <Navbar/>
         <div className={styles.container}>
         <Sidebar isStudy={true} isSelected={true} handleEndStudy={() => setShowModal(true)}/>

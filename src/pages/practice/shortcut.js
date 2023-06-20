@@ -119,7 +119,7 @@ const PracticeShortcut = () => {
         </div>
       )}
       {currentIdx === shortcuts.length ? <Modal title="Visual Studio Code 단축키 연습" handleRetry={handleRetry} handleExit={handleExit}/> : ""}
-      <div style={currentIdx === shortcuts.length ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
+      <div style={currentIdx === shortcuts.length || showModal ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
         <Navbar/>
         <div className={styles.container}>
         <Sidebar isStudy={true} isSelected={true} handleEndStudy={() => setShowModal(true)}/>
