@@ -17,11 +17,8 @@ const MyPage = () => {
   
   const handleLogout = async () => {
     try {
-      const response = await fetch('/api/logout', {
-        method: 'POST',
-        credentials: true, // 'connect.sid' 쿠키를 포함하도록 설정
-      });
-      if (response.ok) {
+      const response = await axios.post('http://localhost:5000/api/logout', {}, {withCredentials: true})
+      if (response) {
         localStorage.clear()
         router.replace('/');
       } else {
