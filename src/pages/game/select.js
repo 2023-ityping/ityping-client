@@ -93,7 +93,41 @@ const SelectGame = (props) => {
 							</div>
 							<div style={{color: '#FDFDFD', fontWeight: 500, position:'absolute', top: '836px', left:'860px'}}>랭킹 : {myrank} 등</div>
 						</div>
-						<div onClick={emmatsgames}><img src='/images/game_back.png'/></div>
+						
+						<div className={styles.card_container}>
+							<p className={styles.match_text}>카드 뒤집기</p>
+							<div className={styles.card_rank_container}>
+								<p className={styles.rank_text}>랭킹</p>
+								<div className={styles.rank_box}>
+									<div className={styles.left_box} style={{marginLeft: '-10px'}}W >
+									{rank.map((item, index) => (
+										<div className={styles.rank} key={index}>
+											<span className={styles.numr} style={index < 3 ? { color: '#6C5DD3' } : null}>{index + 1}. </span>
+											<span className={styles.text} style={index < 3 ? { color: '#6C5DD3' } : null}>{item.name}</span>
+											<span className={styles.score} style={index < 3 ? { color: '#6C5DD3' } : null}>{item.score}점</span>
+										</div>
+									))}
+									</div>
+									<div className={styles.line}></div>
+									<div className={styles.right_box} style={{marginLeft: '-10px'}}>
+									{rank2.map((item, index) => (
+										<div className={styles.rank} key={index}>
+											<span className={styles.numr}>{index + 1 + 10}. </span>
+											<span className={styles.text}>{item.name}</span>
+											<span className={styles.score}>{item.score}점</span>
+										</div>
+									))}
+									</div>
+								</div>
+							</div>
+							<button className={styles.start_btn} onClick={handleButtonClick}>START</button>
+							<div className={styles.record_box}>
+								<p className={styles.record}>내기록</p>
+								<p className={styles.record}>최고점수 : {max} 점</p>
+								<p className={styles.record}>최근점수 : {min} 점</p>
+							</div>
+							<div style={{color: '#FDFDFD', fontWeight: 500, position:'absolute', top: '836px', left:'1571px'}}>랭킹 : {myrank} 등</div>
+						</div>
 					</div>
 				</div>
 			</div>

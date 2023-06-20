@@ -22,8 +22,7 @@ const TrainingEmmat = () => {
 	const [text, setText] = useState('');
 	const [color, setColor] = useState('');
 	const [correct, setCorrect] = useState(false);
-	const emmat = emmats[currentIdx];
-
+	const emmat =  currentIdx < emmats.length ? emmats[currentIdx] : null;
 	const [jsConfetti, setJsConfetti] = useState(null);
 
   useEffect(() => {
@@ -72,6 +71,17 @@ const TrainingEmmat = () => {
     }
   }  
 
+	const handleRetry = () => {
+    setCurrentIdx(0);
+    setCurrentKeyIdx(0);
+    setVisible(false);
+    setComplete(false);
+  }
+
+  const handleExit = () => {
+    redirect('/study/emmat');
+  }
+
 	return (
 		<>
 			{!showModal && (
@@ -83,12 +93,12 @@ const TrainingEmmat = () => {
           </div>
           <div className={styles.btn_container}>
             <button className={styles.btn} onClick={stuEmmat}>저장하기</button>
-            <button className={styles.btn} onClick={handleCloseModal}>종료하기</button>
+            <button className={styles.btn} onClick={handleCloseModal}>계속하기</button>
           </div>
         </div>
       )}
-			{currentIdx === emmats.length-1 ? <Modal title="Visual Studio Code 단축어 실습"/> : ""}
-			<div style={currentIdx === emmats.length-1 ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
+			{currentIdx === emmats.length ? <Modal title="Visual Studio Code 단축어 실습" handleRetry={handleRetry} handleExit={handleExit}/> : ""}
+			<div style={currentIdx === emmats.length || showModal ? {width: "100%", height: "100%", backgroundColor: "#D9D9D9", opacity: "50%"} : null}>
 				<Navbar/>
 				<div className={styles.container}>
 					<Sidebar isStudy={true} isSelected={true} handleEndStudy={() => setShowModal(true)}/>
@@ -103,12 +113,14 @@ const TrainingEmmat = () => {
 							<div className={styles.all_page}>{emmats.length}</div>
 						</div>
 						<div className={styles.card} style={{backgroundImage: "url('/images/training_card.png')"}}>
-							<div className={styles.card_content}>{emmat.description}</div>
+							{emmat && (<div className={styles.card_content}>{emmat.description}</div>)}
 						</div>
+						{emmat && (
 						<div className={styles.input_container}>
 							<label className={styles.text}>답</label>
 							<input className={styles.input} style={ visible ? {backgroundColor: color} : null} disabled={isDisable} value={text} onChange={handlerEmmat}/>
 						</div>
+						)}
 						{
 							!visible ?
 							<button className={styles.enter_btn}
@@ -134,7 +146,7 @@ const TrainingEmmat = () => {
 									setIsDisable(false);
 									setCurrentIdx(idx => idx + 1);
 									setVisible(false);
-									currentIdx === shortcuts.length-2 && handler();
+									currentIdx === shortcuts.length-1 && handler();
 								}}>나중에 한 번 더</button>
 						}
 						</div>
