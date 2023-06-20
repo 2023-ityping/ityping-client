@@ -19,7 +19,7 @@ const Record = () => {
     const getRecord = async () => {
       try {
         const email = localStorage.getItem('email'); // 로컬 스토리지에서 이메일 값을 가져옴
-        const response = await axios.get(`http://localhost:5000/api/getrecord?email=${email}`);
+        const response = await axios.get(`http://localhost:5000/api/study/record?email=${email}`);
         const { data } = response;
         console.log(data); // 받아온 데이터 확인
         setStuemmat(data.records.stu_emmat)
@@ -32,13 +32,13 @@ const Record = () => {
     };
     getRecord();
   }, []);
-  
+
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className={styles.container}>
-        <Sidebar isStudy={false} isSelected={true}/>
+        <Sidebar isStudy={false} isSelected={true} />
         <div>
           <p className={styles.text}>MY PAGE</p>
           <div className={styles.btn_container1}>
@@ -46,8 +46,8 @@ const Record = () => {
             <button className={styles.record_btn}>기록보기</button>
           </div>
           <div className={styles.card_container}>
-            <RecordCard type="연습" emmat={praemmat} shortcut={prashortcut}/>
-            <RecordCard type="실습" emmat={stuemmat} shortcut={stushortcut}/>
+            <RecordCard type="연습" emmat={praemmat} shortcut={prashortcut} />
+            <RecordCard type="실습" emmat={stuemmat} shortcut={stushortcut} />
           </div>
         </div>
       </div>

@@ -4,9 +4,11 @@ import React, { useState, useSyncExternalStore } from "react";
 import axios from 'axios';
 import Navbar from "../component/Navbar";
 import { useRouter } from "next/router";
+import { signIn, useSession } from 'next-auth/react';
 
 const Login = () => {
   const router = useRouter();
+  const { data, status } = useSession()
   const [id, setId] = useState("");
   const [pw, setPw] = useState(""); 
 
@@ -22,10 +24,10 @@ const Login = () => {
     e.preventDefault();
     try {
       // 서버로 로그인 요청을 보냄
-      const response = await axios.post("/api/login", {
+      const response = await axios.post("http://localhost:5000/api/login", {
         email: id,
         password: pw
-      });
+      }, {withCredentials: true});
   
       // 응답의 상태 코드를 확인하여 로그인 성공 여부를 판단
       if (response.status === 200) {
@@ -73,7 +75,7 @@ const Login = () => {
           </button>
         </form>
         <div className={styles.or}>OR</div>
-        <button className={styles.google_btn}>
+        <button className={styles.google_btn} onClick={()=> signIn('google')}>
           <img className={styles.google_img} src="/images/google.png" />
           Sign in with Google
         </button>

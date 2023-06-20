@@ -22,7 +22,7 @@ const SelectGame = (props) => {
     useEffect(() => {
         const fetchGameRank = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/gameRank");
+                const response = await axios.get("http://localhost:5000/api/game/rank");
                 const { data } = response;
 				const arr1 = data.results.slice(0, 10); // 1등부터 10등까지의 데이터만 추출
                 const arr2 = data.results.slice(10, 20);
@@ -35,7 +35,7 @@ const SelectGame = (props) => {
 		fetchGameRank();
         const fetchMyGameRank = async () => {
             try {
-				const response = await axios.get("http://localhost:5000/api/gameMyRank", {
+				const response = await axios.get("http://localhost:5000/api/game/my-rank", {
 					params: {
 						email: localStorage.getItem('email'),
 					},

@@ -54,13 +54,13 @@ const TrainingEmmat = () => {
     try {
       const email = localStorage.getItem('email');
       const count = currentIdx;
-      const response = await axios.get("http://localhost:5000/api/update", {
+      const response = await axios.get("http://localhost:5000/api/study/update", {
         params: {
           data: "stu_emmat", // 여기에 쿼리 매개변수 설정
           email: email,
           count: count
         }
-      });
+      }, { withCredentials: true });
   
       if (response) {
         alert("성공");
