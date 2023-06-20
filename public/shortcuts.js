@@ -20,11 +20,6 @@ export const shortcuts = [
         combination: ["Control", "o"]
     },
     {
-        text: "Ctrl + W",
-        description: "현재 열려있는 파일 닫기",
-        combination: ["Control", "w"]
-    },
-    {
         text: "Ctrl + S",
         description: "파일 저장",
         combination: ["Control", "s"]
@@ -50,29 +45,9 @@ export const shortcuts = [
         combination: ["Control", "Shift", "k"]
     },
     {
-        text: "Ctrl + D",
-        description: "줄 복사",
-        combination: ["Control", "d"]
-    },
-    {
-        text: "Ctrl + Shift + L",
-        description: "전체 줄 복사",
-        combination: ["Control", "Shift", "l"]
-    },
-    {
         text: "Ctrl + /",
         description: "문장 단위 주석",
         combination: ["Control", "/"]
-    },
-    {
-        text: "Ctrl + Shift + P",
-        description: "Command Palette를 오픈",
-        combination: ["Control", "Shift", "p"]
-    },
-    {
-        text: "Ctrl + P",
-        description: "전체 디렉토리에서 '파일명' 검색",
-        combination: ["Control", "p"]
     },
     {
         text: "Ctrl + Shift + Tab",
@@ -89,9 +64,40 @@ export const shortcuts = [
         description: "모든 항목 변경",
         combination: ["Control", "F2"]
     },
+    {	
+        text: "Ctrl + F",
+        description: "일치하는 텍스트 검색",
+        combination: ["Control", "F"]
+    },
+    {
+        text: "Ctrl + H",
+        description: "일치하는 텍스트 변경",
+        combination: ["Control", "H"]
+    },
+    {
+        text: "Ctrl + ,",
+        description: "설정 열기",
+        combination: ["Control", ","]
+    },
+    {
+        text: "Ctrl + `",
+        description: "터미널 열기",
+        combination: ["Control", "`"]
+    },
+    {
+        text: "Ctrl + B",
+        description: "왼쪽 탐색창 열기",
+        combination: ["Control", "B"]
+    },
     {
         text: "Alt + Ctrl + 방향키 위(아래)",
         description: "커서를 여러 개 만듦",
         combination: ["Alt", "Control", "ArrowUp"]
-    }
+    },
+    {
+        text: "Ctrl + G",
+        description: "해당 라인으로 이동",
+        combination: ["Control", + "G"]
+    },
+    {}
 ];
