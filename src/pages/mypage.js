@@ -19,7 +19,7 @@ const MyPage = () => {
     try {
       const response = await fetch('/api/logout', {
         method: 'POST',
-        credentials: 'include', // 'connect.sid' 쿠키를 포함하도록 설정
+        credentials: true, // 'connect.sid' 쿠키를 포함하도록 설정
       });
       if (response.ok) {
         localStorage.clear()
