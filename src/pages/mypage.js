@@ -3,6 +3,7 @@ import Navbar from '../component/Navbar';
 import Sidebar from '../component/Sidebar';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const MyPage = () => {
   const router = useRouter();
@@ -17,15 +18,19 @@ const MyPage = () => {
   
   const handleLogout = async () => {
     try {
+      console.log("hi")
       const response = await axios.post('http://localhost:5000/api/logout', {}, {withCredentials: true})
       if (response) {
         localStorage.clear()
         router.replace('/');
+        console.log("Logout successful");
       } else {
         // 오류 처리
+        console.log("Logout failed");
       }
     } catch (error) {
       // 오류 처리
+      console.log("Error during logout:", error);
     }
   };
 
