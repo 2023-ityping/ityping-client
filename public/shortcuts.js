@@ -10,9 +10,9 @@ export const shortcuts = [
         combination: ["Alt", "ArrowUp"]
     },
     {
-        text: "Ctrl + Tab",
-        description: "탭 이동",
-        combination: ["Control", "Tab"]
+        text: "Ctrl + Shift + R",
+        description: "코드를 함수나 변수로 묶음",
+        combination: ["Control", "Shift", "r"]
     },
     {
         text: "Ctrl + O",
@@ -67,12 +67,12 @@ export const shortcuts = [
     {	
         text: "Ctrl + F",
         description: "일치하는 텍스트 검색",
-        combination: ["Control", "F"]
+        combination: ["Control", "f"]
     },
     {
         text: "Ctrl + H",
         description: "일치하는 텍스트 변경",
-        combination: ["Control", "H"]
+        combination: ["Control", "h"]
     },
     {
         text: "Ctrl + ,",
@@ -87,7 +87,7 @@ export const shortcuts = [
     {
         text: "Ctrl + B",
         description: "왼쪽 탐색창 열기",
-        combination: ["Control", "B"]
+        combination: ["Control", "b"]
     },
     {
         text: "Alt + Ctrl + 방향키 위(아래)",
@@ -97,7 +97,6 @@ export const shortcuts = [
     {
         text: "Ctrl + G",
         description: "해당 라인으로 이동",
-        combination: ["Control", + "G"]
-    },
-    {}
+        combination: ["Control", "g"]
+    }
 ];
