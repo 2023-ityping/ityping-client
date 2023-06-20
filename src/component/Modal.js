@@ -16,8 +16,8 @@ const Modal = (props) => {
                 })}/>
             </div>
             <div className={styles.btn_container}>
-                <button className={styles.btn}>다시하기</button>
-                <button className={styles.btn}>나가기</button>
+                <button className={styles.btn} onClick={props.handleRetry}>다시하기</button>
+                <button className={styles.btn} onClick={props.handleExit}>나가기</button>
             </div>
         </div>
     );
