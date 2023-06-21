@@ -1,14 +1,14 @@
 import Navbar from '@/src/component/Navbar';
 import Sidebar from '@/src/component/Sidebar';
 import styles from '@/styles/GameStart.module.css'
-import { emmatsgames } from '@/public/emmats';
+import { emmats } from '@/public/emmats';
 import { useState,useEffect } from 'react';
 import ModalResult from '@/src/component/GameResultModal';
 import Modal from '@/src/component/GameModal';
 
 const SelectGame = (props) => {
   const [score, setScore] = useState(0);
-  const [timer, setTime] = useState(5);
+  const [timer, setTime] = useState(10005);
   const [cards, setCards] = useState([]);
   const [cards2, setCards2] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -24,10 +24,10 @@ const SelectGame = (props) => {
 
   //랜덤으로 단축키 4개 선택 
   useEffect(() => {
-    const selectedemmatsgames = getRandomemmatsgames(emmatsgames, 4); // Select 4 random emmatsgames
-    console.log(selectedemmatsgames)
-    const shuffledTexts = shuffle(selectedemmatsgames)
-    const shuffledDescriptions = shuffle(selectedemmatsgames.map((emmatsgames) => emmatsgames.description))
+    const selectedShortcuts = getRandomShortcuts(emmats, 4); // Select 4 random shortcuts
+    console.log(selectedShortcuts)
+    const shuffledTexts = shuffle(selectedShortcuts)
+    const shuffledDescriptions = shuffle(selectedShortcuts.map((emmats) => emmats.description))
     setCards(shuffledTexts);
     setCards2(shuffledDescriptions);
   }, []);
@@ -54,14 +54,19 @@ const SelectGame = (props) => {
     setIsModalOpen(true);
     setTimeout(() => {
       setIsModalOpen(false);
-    }, 2000)
+    }, 1000)
   }
 
   // 클릭했을 때 정답인지 아닌지 확인하기 
   const handleCardClick = (index, num) => {
-    if (flippedCards.length < 2) {
+    if (flippedCards.length < 2 && !flippedCards.includes(index) && !matchedCards.includes(index)) {
       const newFlippedCards = [...flippedCards, index];
       setFlippedCards(newFlippedCards);
+
+      if (flippedCards.length < 2 && !flippedCards.includes(index) && !matchedCards.includes(index)) {
+        const newFlippedCards = [...flippedCards, index];
+        setFlippedCards(newFlippedCards);
+
       if (newFlippedCards.length === 2) {
         const [cardIndex1, cardIndex2] = newFlippedCards;
         const card1 = num === 2 ? cards[cardIndex1] : cards[cardIndex2];
@@ -77,16 +82,16 @@ const SelectGame = (props) => {
             setInx1([...idx2, cardIndex2])
             setInx2([...idx1, cardIndex1])
           }
-          
-          if(idx1.length == 4 || idx2.length == 4){
+          console.log(idx1.length, idx2.length)
+          if(idx1.length == 2 || idx2.length == 2){
             setInx1([])
             setInx2([])
             setTimeout(() => {
               //새로운 카드 생성
-              const selectedemmatsgames = getRandomemmatsgames(emmatsgames, 4); // Select 4 random emmatsgames
-              console.log(selectedemmatsgames)
-              const shuffledTexts = shuffle(selectedemmatsgames)
-              const shuffledDescriptions = shuffle(selectedemmatsgames.map((emmatsgames) => emmatsgames.description))
+              const selectedShortcuts = getRandomShortcuts(emmats, 4); // Select 4 random shortcuts
+              console.log(selectedShortcuts)
+              const shuffledTexts = shuffle(selectedShortcuts)
+              const shuffledDescriptions = shuffle(selectedShortcuts.map((emmats) => emmats.description))
               setCards(shuffledTexts);
               setCards2(shuffledDescriptions);
               setFlippedCards([])
@@ -94,9 +99,7 @@ const SelectGame = (props) => {
           }
         } else {
           setScore((score) => score - 50);
-          // 단어에 대한 설명
-          setDescription(card1.description)
-          setTitle(card1.emmat)
+          setTitle(card1.emmats)
           setModalStyle(false)
         }
         openModal()
@@ -105,12 +108,13 @@ const SelectGame = (props) => {
         }, 1000);
       }
     }
-  };
+  }
+}
 
-  const getRandomemmatsgames = (emmatsgames, count) => {
-    const uniqueemmatsgames = Array.from(new Set(emmatsgames)); // 중복 제거
-    const shuffledemmatsgames = shuffle(uniqueemmatsgames);
-    return shuffledemmatsgames.slice(0, count);
+  const getRandomShortcuts = (shortcuts, count) => {
+    const uniqueShortcuts = Array.from(new Set(shortcuts)); // 중복 제거
+    const shuffledShortcuts = shuffle(uniqueShortcuts);
+    return shuffledShortcuts.slice(0, count);
   };
 
   const shuffle = (array) => {
@@ -128,14 +132,14 @@ const SelectGame = (props) => {
 			<div className={styles.container}>
 				<Sidebar isStudy={false} isSelected={true} isGame={true}/>
 				<div className={styles.right_container}>
-					<p className={styles.title}>Visual Studio Code 게임</p>
+					<p className={styles.title}>Visual Studio Code 단축키 게임</p>
           <div className={styles.title_group}>
               <p className={styles.score }>점수 : {score}점</p>
               <p className={styles.score  }>{timer}초</p>
           </div>
 					<div className={styles.game_container}>
             {isModalOpen && (
-              <Modal style={modalStyle} text={title} description={description} />
+              <Modal style={modalStyle} text={title} description={description}/>
             )}
             {isModalOpenResult && (
               <ModalResult score = {score} gametype={gametype}/>
@@ -150,6 +154,7 @@ const SelectGame = (props) => {
                       isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
                       key={index}
                     >
+                      <div>{card.emmat}</div>
                     </div>
                   );
                 } else {
@@ -188,6 +193,7 @@ const SelectGame = (props) => {
                     isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
                     onClick={() => {
                       handleCardClick(index, 2)
+                      setDescription(card)
                       }}>
                     <div>{card}</div>
                 </div>
@@ -196,7 +202,7 @@ const SelectGame = (props) => {
               })}
             </div>
             {isModalOpenResult && (
-              <div className={styles.modal_back}></div>
+              <div className={styles.modal_back} ></div>
             )}
 					</div>
 				</div>

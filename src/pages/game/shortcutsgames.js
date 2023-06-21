@@ -78,7 +78,7 @@ const SelectGame = (props) => {
             setInx2([...idx1, cardIndex1])
           }
           
-          if(idx1.length == 4 || idx2.length == 4){
+          if(idx1.length == 2 || idx2.length == 2){
             setInx1([])
             setInx2([])
             setTimeout(() => {
@@ -128,7 +128,7 @@ const SelectGame = (props) => {
 			<div className={styles.container}>
 				<Sidebar isStudy={false} isSelected={true} isGame={true}/>
 				<div className={styles.right_container}>
-					<p className={styles.title}>Visual Studio Code 게임</p>
+					<p className={styles.title}>Visual Studio Code 단축키 게임</p>
           <div className={styles.title_group}>
               <p className={styles.score }>점수 : {score}점</p>
               <p className={styles.score  }>{timer}초</p>
@@ -188,6 +188,7 @@ const SelectGame = (props) => {
                     isFlipped={flippedCards.includes(index) || matchedCards.includes(index)}
                     onClick={() => {
                       handleCardClick(index, 2)
+                      setDescription(card)
                       }}>
                     <div>{card}</div>
                 </div>

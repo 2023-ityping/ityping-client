@@ -1,0 +1,17 @@
+#card_container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+#card{
+  width: 200px;
+  height: 100px;
+  margin: 10px;
+  background-color: pink;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
