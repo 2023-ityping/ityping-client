@@ -8,10 +8,10 @@ const RecordCard = (props) => {
     const [completionRatio , setCompletionRatio ] = useState(null);
 
     useEffect(() => {
-      const totalTasks = 31;
+      const totalTasks = 32
       const completedTasks = props.shortcut + props.emmat;
       const temp = ((completedTasks / totalTasks) * 100).toFixed(2);;
-      setNum(props.shortcut + props.emmat);
+      // setNum(props.shortcut + props.emmat);
       setCompletionRatio(temp);
       console.log(completionRatio);
   }, [props.shortcut, props.emmat]);

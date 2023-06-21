@@ -135,7 +135,7 @@ const SelectGame = (props) => {
           </div>
 					<div className={styles.game_container}>
             {isModalOpen && (
-              <Modal style={modalStyle} text={title} description={description}/>
+              <Modal style={modalStyle} text={title} description={description} />
             )}
             {isModalOpenResult && (
               <ModalResult score = {score} gametype={gametype}/>

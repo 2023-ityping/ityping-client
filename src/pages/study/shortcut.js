@@ -4,24 +4,23 @@ import Navbar from '@/src/component/Navbar';
 import Progress from '@/src/component/Progress';
 import Sidebar from '@/src/component/Sidebar';
 import styles from '@/styles/Study.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { shortcuts } from '@/public/shortcuts';
 
-const StudyShortCut = (props) => {
+const StudyShortCut = () => {
     const [currentValue, setCurrentValue] = useState("단축키");
     const [showOptions, setShowOptions] = useState(false);
-  
+    const type = "shortcut"
     const handleOnChangeSelectValue = (e) => {
       setCurrentValue(e.target.getAttribute("value"));
     };
-
     return (
         <>  
             <Navbar/>
             <div className={styles.container}>
                 <Sidebar isStudy={false} isSelected={true}/>
                 <div className={styles.right_container}>
-                    <Progress/>
+                    <Progress props={type}/>
                     <div className={styles.menu_container}>
                         <div className={styles.select} onClick={() => {
                                 console.log(showOptions)

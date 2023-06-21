@@ -81,25 +81,25 @@ const TrainingShortcut = () => {
   }
 
   const stuShortcut = async () => {
-    try {
-      const email = localStorage.getItem('email');
-      const count = currentIdx;
-  
-      const response = await axios.get("http://localhost:5000/api/update", {
-        params: {
-          data: "stu_shortcut", // 여기에 쿼리 매개변수 설정
-          email: email,
-          count: count
-        }
-      });
-  
-      if (response) {
-        alert("성공");
-        router.replace('/study/shortcut');
-      }
-    } catch (error) {
-      console.error("요청 중 오류 발생:", error);
-    }
+		try {
+			const email = localStorage.getItem('email');
+			const count = currentIdx;
+			const response = await axios.put("http://localhost:5000/api/study/update", {
+			  params: {
+				data: "stu_shortcut", // 여기에 쿼리 매개변수 설정
+				email: email,
+				count: count
+			  }
+			}, { withCredentials: true }); //서버 클라이언트로 전달 시 체크
+	  
+			console.log(response)
+			if (response) {
+			  alert("성공");
+			  router.replace('/study/shortcut');
+			}
+		  } catch (error) {
+			console.error("요청 중 오류 발생:", error);
+		  }
   }  
 
   const handleRetry = () => {
@@ -119,7 +119,7 @@ const TrainingShortcut = () => {
         <div className={styles.modal}>
             <p className={styles.title2}>Visual Studio Code 단축어 연습</p>
           <div className={styles.modalContent}>
-            <p className={styles.text}>22/28개 진행중입니다.
+            <p className={styles.text}>{currentIdx}/20개 진행중입니다.
             <br/>저장하시겠습니까?</p>
           </div>
           <div className={styles.btn_container}>

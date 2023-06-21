@@ -46,8 +46,9 @@ const PracticeShortcut = () => {
           email: email,
           count: count
         }
-      }, { withCredentials: true });
+      }, { withCredentials: true }); //서버 클라이언트로 전달 시 체크
 
+      console.log(response)
       if (response) {
         alert("성공");
         router.replace('/study/shortcut');
@@ -56,7 +57,6 @@ const PracticeShortcut = () => {
       console.error("요청 중 오류 발생:", error);
     }
   }
-
 
   useEffect(() => {
     const handler = (e) => {

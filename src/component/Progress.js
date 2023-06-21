@@ -1,8 +1,37 @@
 import styles from '@/styles/Progress.module.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Progress = (props) => {
+    const [num, setNum] = useState(null);
+    const [completionRatio , setCompletionRatio ] = useState(null);
+    const [emmat, setEmmat] = useState(null) //단축어 학습 개수
+    const [shortcut, setShortcut] = useState(null) // 단축키 학습 개수
+    useEffect(() => {
+        const getRecord = async () => {
+          try {
+            const email = localStorage.getItem('email'); // 로컬 스토리지에서 이메일 값을 가져옴
+            const response = await axios.get(`http://localhost:5000/api/study/record?email=${email}`);
+            const { data } = response;
+            console.log(data); // 받아온 데이터 확인
+            if(props == "shortcut"){
+                setShortcut(data.records.pra_shortcut + data.records.stu_shortcut)
+            }else{
+                setEmmat(data.records.pra_emmat + data.records.stu_emmat)
+            }
+            const totalTasks = 20;
+            const completedTasks = emmat + shortcut;
+            const temp = ((completedTasks / totalTasks) * 100).toFixed(2);;
+            setCompletionRatio(temp);
+            console.log(completionRatio);
+          } catch (error) {
+            console.error("오류 발생:", error);
+          }
+        };
+        getRecord();
+      }, []);
 
     return (
         <div className={styles.container}>
@@ -20,7 +49,7 @@ const Progress = (props) => {
                 </div>
             </div>
             <div className={styles.right_container}>
-                <CircularProgressbar value={28} text={`28%`} styles={buildStyles({
+                <CircularProgressbar value={completionRatio} text={`${completionRatio}%`} styles={buildStyles({
                     pathColor: '#6C5DD3',
                     textColor: '#FFFFFF',
                     trailColor: '#F3EEFF'

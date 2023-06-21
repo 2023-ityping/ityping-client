@@ -8,8 +8,6 @@ import { useEffect, useState } from 'react';
 
 const Record = () => {
   const router = useRouter();
-  const [pract, setPract] = useState(null) //vscode 연습 총 합
-  const [study, setStudy] = useState(null) //vscode 실습 총 합
   const [stuemmat, setStuemmat] = useState(null) //단축어 학습 개수
   const [stushortcut, setStushortcut] = useState(null) // 단축키 학습 개수
   const [praemmat, setPraemmat] = useState(null) // 단축어 연습 개수 
