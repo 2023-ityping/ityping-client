@@ -32,11 +32,15 @@ const SignUp = () => {
         nickname: nickname
       });
       if(response) {
-        alert("성공")
-        router.push('/login')
+        if(response.data.message == '중복된 email 입니다.'){
+          alert(response.data.message)
+        }else{
+          alert("성공")
+          router.push('/login')
+        }
       }
     } catch (error) {
-      console.error("회원가입 중 오류 발생:", error);
+      alert("중복된 아이디입니다.", error);
     }
   };
 
