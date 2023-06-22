@@ -10,7 +10,6 @@ import { shortcuts } from '@/public/shortcuts';
 const StudyShortCut = () => {
     const [currentValue, setCurrentValue] = useState("단축키");
     const [showOptions, setShowOptions] = useState(false);
-    const type = "shortcut"
     const handleOnChangeSelectValue = (e) => {
       setCurrentValue(e.target.getAttribute("value"));
     };
@@ -20,7 +19,7 @@ const StudyShortCut = () => {
             <div className={styles.container}>
                 <Sidebar isStudy={false} isSelected={true}/>
                 <div className={styles.right_container}>
-                    <Progress props={type}/>
+                    <Progress props="shortcut"/>
                     <div className={styles.menu_container}>
                         <div className={styles.select} onClick={() => {
                                 console.log(showOptions)

@@ -8,7 +8,7 @@ import Modal from '@/src/component/GameModal';
 
 const SelectGame = (props) => {
   const [score, setScore] = useState(0);
-  const [timer, setTime] = useState(10005);
+  const [timer, setTime] = useState(40);
   const [cards, setCards] = useState([]);
   const [cards2, setCards2] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);

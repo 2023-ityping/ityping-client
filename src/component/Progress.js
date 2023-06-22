@@ -7,8 +7,8 @@ import axios from 'axios';
 const Progress = (props) => {
     const [num, setNum] = useState(null);
     const [completionRatio , setCompletionRatio ] = useState(null);
-    const [emmat, setEmmat] = useState(null) //단축어 학습 개수
-    const [shortcut, setShortcut] = useState(null) // 단축키 학습 개수
+    const [emmat, setEmmat] = useState(0) //단축어 학습 개수
+    const [shortcut, setShortcut] = useState(0) // 단축키 학습 개수
     useEffect(() => {
         const getRecord = async () => {
           try {
@@ -16,22 +16,31 @@ const Progress = (props) => {
             const response = await axios.get(`http://localhost:5000/api/study/record?email=${email}`);
             const { data } = response;
             console.log(data); // 받아온 데이터 확인
-            if(props == "shortcut"){
+            console.log("data : ", data.records.pra_shortcut + data.records.stu_shortcut)
+            if(props.props == "shortcut"){
                 setShortcut(data.records.pra_shortcut + data.records.stu_shortcut)
+                console.log("short : ", shortcut)
             }else{
                 setEmmat(data.records.pra_emmat + data.records.stu_emmat)
             }
             const totalTasks = 20;
-            const completedTasks = emmat + shortcut;
-            const temp = ((completedTasks / totalTasks) * 100).toFixed(2);;
+            let temp = 0;
+            // const completedTasks = emmat + shortcut;
+            if(props.props == "shortcut"){
+                temp = ((shortcut / totalTasks) * 100).toFixed(2);
+            }else{
+                temp = ((emmat / totalTasks) * 100).toFixed(2);
+            }
             setCompletionRatio(temp);
+            console.log("e, s : ", emmat, shortcut)
             console.log(completionRatio);
           } catch (error) {
             console.error("오류 발생:", error);
           }
         };
         getRecord();
-      }, []);
+
+      });
 
     return (
         <div className={styles.container}>
