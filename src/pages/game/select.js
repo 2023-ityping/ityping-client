@@ -69,7 +69,7 @@ const SelectGame = (props) => {
 		<>  
 			<Navbar/>
 			<div className={styles.container}>
-				<Sidebar isStudy={true} isSelected={true}/>
+				<Sidebar isStudy={true} isSelected={true} handleEndStudy={() => router.push('/')}/>
 				<div className={styles.right_container}>
 					<p className={styles.title}>Visual Studio Code 게임</p>
 					<div className={styles.game_container}>

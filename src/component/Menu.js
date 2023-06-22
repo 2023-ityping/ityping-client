@@ -3,9 +3,9 @@ import styles from '@/styles/Menu.module.css';
 const Menu = (props) => {
     return (
         <div className={styles.container}>
-            <div className={styles.menu_btn}><a href={props.isShortcut ? '/practice/shortcut' : '/practice/emmat'}>연습</a></div>
-            <div className={styles.menu_btn}><a href={props.isShortcut ? '/training/shortcut' : '/training/emmat'}>실습</a></div>
-            <div className={styles.menu_btn}><a>게임</a></div>
+            <a href={props.isShortcut ? '/practice/shortcut' : '/practice/emmat'}><div className={styles.menu_btn}>연습</div></a>
+            <a href={props.isShortcut ? '/training/shortcut' : '/training/emmat'}><div className={styles.menu_btn}>실습</div></a>
+            <a href={'/game/select'}><div className={styles.menu_btn}>게임</div></a>
         </div>
     );
 }
